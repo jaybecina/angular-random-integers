@@ -1,0 +1,23 @@
+<ng-container *ngIf="isLoading; else chartContent">
+  <ngx-skeleton-loader
+    appearance="square"
+    [theme]="{ width: '700px', height: '300px' }"
+  ></ngx-skeleton-loader>
+</ng-container>
+<ng-template #chartContent>
+  <ngx-charts-line-chart
+    [view]="[700, 300]"
+    [results]="[{ name: 'Random Integer', series: latest20 }]"
+    [xAxis]="true"
+    [yAxis]="true"
+    [showXAxisLabel]="true"
+    [showYAxisLabel]="true"
+    [xAxisLabel]="'Index'"
+    [yAxisLabel]="'Value'"
+    [autoScale]="true"
+    [legend]="legend"
+    [legendTitle]="legendTitle"
+    [legendPosition]="legendPosition"
+    [showGridLines]="showGridLines"
+  ></ngx-charts-line-chart>
+</ng-template>

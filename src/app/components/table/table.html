@@ -1,0 +1,39 @@
+<ng-container *ngIf="isLoading; else tableContent">
+  <ngx-skeleton-loader
+    count="10"
+    appearance="line"
+    style="height: 40px; margin-bottom: 8px"
+  ></ngx-skeleton-loader>
+</ng-container>
+<ng-template #tableContent>
+  <table
+    mat-table
+    [dataSource]="numbers"
+    class="mat-elevation-z8"
+    style="width: 100%; margin-bottom: 20px"
+  >
+    <ng-container matColumnDef="created">
+      <th mat-header-cell *matHeaderCellDef>Created</th>
+      <td mat-cell *matCellDef="let element">{{ formatDate(element.created) }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="value">
+      <th mat-header-cell *matHeaderCellDef>Value</th>
+      <td mat-cell *matCellDef="let element">{{ element.value }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="generator_user">
+      <th mat-header-cell *matHeaderCellDef>Generator User</th>
+      <td mat-cell *matCellDef="let element">{{ element.generator_user }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator
+    [length]="totalCount"
+    [pageSize]="pageSize"
+    (page)="onPageChange($event)"
+  ></mat-paginator>
+</ng-template>

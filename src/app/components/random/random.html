@@ -1,0 +1,25 @@
+<div style="margin: 20px">
+  <button mat-raised-button color="primary" (click)="generate()" [disabled]="isLoading">
+    <ng-container *ngIf="isLoading; else btnText">
+      <ngx-skeleton-loader
+        count="1"
+        appearance="line"
+        style="width: 120px; height: 36px"
+      ></ngx-skeleton-loader>
+    </ng-container>
+    <ng-template #btnText>Generate New Number</ng-template>
+  </button>
+
+  <h2>Generated Numbers</h2>
+  <app-table
+    [numbers]="numbers"
+    [displayedColumns]="displayedColumns"
+    [totalCount]="totalCount"
+    [pageSize]="pageSize"
+    [isLoading]="isLoading"
+    (pageChange)="onPageChange($event)"
+  ></app-table>
+
+  <h2 style="margin-top: 40px">Latest 20 Numbers (Line Chart)</h2>
+  <app-chart [latest20]="latest20" [isLoading]="isLoading"></app-chart>
+</div>
